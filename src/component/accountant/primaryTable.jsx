@@ -6,7 +6,6 @@ import { DataGrid, ukUA } from "@material-ui/data-grid";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import axios from "axios";
-import { showInputBox } from "./tableAction";
 
 const PrimaryTable = () => {
   const [items, setItems] = useState([]);
@@ -29,13 +28,13 @@ const PrimaryTable = () => {
   };
 
   // unhide input box
-  // const showInputBox = () => {
-  //   if (inputArray.length === 0) {
-  //     setInputArray([...inputArray, { item: "item", price: "price" }]);
-  //   } else {
-  //     return;
-  //   }
-  // };
+  const showInputBox = () => {
+    if (inputArray.length === 0) {
+      setInputArray([...inputArray, { item: "item", price: "price" }]);
+    } else {
+      return;
+    }
+  };
 
   //hide input box
   const removeInputBox = () => {
@@ -147,7 +146,7 @@ const PrimaryTable = () => {
         size="small"
         color="primary"
         aria-label="add"
-        onClick={showInputBox(inputArray, setInputArray)}
+        onClick={showInputBox}
       >
         <AddIcon />
       </Fab>
