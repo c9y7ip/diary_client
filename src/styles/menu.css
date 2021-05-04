@@ -1,0 +1,35 @@
+.split {
+  flex-direction: row;
+  display: flex;
+}
+
+.left {
+  width: 100%;
+  background-color: #e9fae3;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.middle {
+  width: 100%;
+  background-color: #e4f1dc;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.right {
+  width: 100%;
+  background-color: #dee8d5;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.hyperlink {
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: 800;
+  color: blueviolet;
+}
