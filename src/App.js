@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import menu from './component/menu'
-import accountant from './component/accountant/accountant'
-import diary from './component/diary/diary'
-import todo from './component/todo/todo'
+import Menu from './component/menu'
+import Accountant from './component/accountant/accountant'
+import Diary from './component/diary/diary'
+import Todo from './component/todo/todo'
 
 class app extends Component {
   state = {  }
@@ -11,12 +11,18 @@ class app extends Component {
   
   render() { 
     return (
-      <Router>
-        <Route exact path="/" component={menu}/>
-        <Route exact path="/accountant" component={accountant}/>
-        <Route exact path="/diary" component={diary}/>
-        <Route exact path="/todo" component={todo}/>
-      </Router>
+      // <Router>
+      //   <Route exact path="/" component={menu}/>
+      //   <Route exact path="/accountant" component={accountant}/>
+      //   <Route exact path="/diary" component={diary}/>
+      //   <Route exact path="/todo" component={todo}/>
+      // </Router>
+      <div className="App">
+        <Menu/>
+        <Accountant/>
+        <Diary/>
+        <Todo/>
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 .split {
   flex-direction: row;
   display: flex;
+  height: 100vh;
 }
 
 .left {
@@ -28,7 +29,7 @@
 }
 
 .hyperlink {
-  text-decoration: none;
+  text-decoration: underline;
   font-size: x-large;
   font-weight: 800;
   color: blueviolet;

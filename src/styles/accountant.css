@@ -1,6 +1,7 @@
-.container {
+.accountant-container {
   position: relative;
   background: #caf0f8;
+  height: 100vh;
 }
 
 .title {

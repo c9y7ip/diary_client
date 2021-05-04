@@ -6,6 +6,7 @@ import { DataGrid, ukUA } from "@material-ui/data-grid";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import axios from "axios";
+import { showInputBox } from "./tableAction";
 
 const PrimaryTable = () => {
   const [items, setItems] = useState([]);
@@ -13,6 +14,11 @@ const PrimaryTable = () => {
   const [inputItem, setInputItem] = useState("");
   const [inputPrice, setInputPrice] = useState("");
   const [sum, setSum] = useState(0);
+
+  // calculation
+  const addition = (a, b) => {
+    return Number(a) + Number(b);
+  };
 
   const totalSum = () => {
     var result = items.reduce((a, v) => {
@@ -22,22 +28,21 @@ const PrimaryTable = () => {
     setSum(result);
   };
 
-  const addition = (a, b) => {
-    return Number(a) + Number(b);
-  };
+  // unhide input box
+  // const showInputBox = () => {
+  //   if (inputArray.length === 0) {
+  //     setInputArray([...inputArray, { item: "item", price: "price" }]);
+  //   } else {
+  //     return;
+  //   }
+  // };
 
-  const addInput = () => {
-    if (inputArray.length === 0) {
-      setInputArray([...inputArray, { item: "item", price: "price" }]);
-    } else {
-      return;
-    }
-  };
-
-  const removeInput = () => {
+  //hide input box
+  const removeInputBox = () => {
     setInputArray([]);
   };
 
+  // add data to database
   const appendInput = async () => {
     if (inputItem === "" || inputPrice === "") {
       return;
@@ -55,28 +60,15 @@ const PrimaryTable = () => {
         window.location.reload();
       });
 
-      // items.forEach((e, i) => {
-      //   if (e.id === inputItem) {
-      //     setItems(items.splice(i, 1));
-      //     totalSum();
-      //     return;
-      //   }
-      // });
-
-      // setItems([
-      //   ...items,
-      //   { id: inputItem, price: inputPrice, action: "Delete" },
-      // ]);
-      // totalSum();
       setInputItem("");
       setInputPrice("");
       setInputArray([]);
     }
   };
 
+  // useEffect update item table
   useEffect(() => {
     axios.get("http://localhost:5000/getNessarary").then((res) => {
-      // console.log(res.data);
       setItems(res.data);
       totalSum();
     });
@@ -86,6 +78,7 @@ const PrimaryTable = () => {
     <div className="left-section">
       <p className="title">Necessary Expenses</p>
 
+      {/* item table */}
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           columns={[
@@ -114,11 +107,6 @@ const PrimaryTable = () => {
               axios.delete("http://localhost:5000/deleteNessaray", {
                 data: { id: a.id },
               });
-              // setItems(
-              //   items.filter(function (item) {
-              //     return item.id !== a.id;
-              //   })
-              // );
 
               totalSum();
             }
@@ -126,7 +114,7 @@ const PrimaryTable = () => {
         />
       </div>
 
-      {/* input box */}
+      {/* input box ordering */}
       {inputArray.map((input) => (
         <div className="wrapper" key={input.item}>
           <input
@@ -146,16 +134,20 @@ const PrimaryTable = () => {
             }}
           />
           <CheckIcon className="icon" onClick={appendInput} />
-          <ClearIcon className="icon" onClick={removeInput} />
+          <ClearIcon className="icon" onClick={removeInputBox} />
         </div>
       ))}
+
+      {/* Show total sum */}
       <h3 className="total">Total : {sum}</h3>
+
+      {/* + button */}
       <Fab
         className="addButton"
         size="small"
         color="primary"
         aria-label="add"
-        onClick={addInput}
+        onClick={showInputBox(inputArray, setInputArray)}
       >
         <AddIcon />
       </Fab>
