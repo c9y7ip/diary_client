@@ -6,6 +6,7 @@ import { DataGrid, ukUA } from "@material-ui/data-grid";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import axios from "axios";
+import { sumContext } from "./sumContext";
 
 function SecondaryTable() {
   const [items, setItems] = useState([]);
@@ -13,6 +14,7 @@ function SecondaryTable() {
   const [inputItem, setInputItem] = useState("");
   const [inputPrice, setInputPrice] = useState("");
   const [sum, setSum] = useState(0);
+  const { secondarySum, setSecondarySum } = useContext(sumContext);
 
   // calculation
   const addition = (a, b) => {
@@ -24,7 +26,7 @@ function SecondaryTable() {
       return addition(a, v.price);
     }, 0);
 
-    setSum(result);
+    setSecondarySum(result);
   };
 
   // unhide input box
@@ -53,7 +55,7 @@ function SecondaryTable() {
       };
       console.log(item);
 
-      axios.post("http://localhost:5000/addNessaray", item).then((res) => {
+      axios.post("http://localhost:5000/addSecondary", item).then((res) => {
         console.log(res.data);
         totalSum();
         window.location.reload();
@@ -67,7 +69,7 @@ function SecondaryTable() {
 
   // useEffect update item table
   useEffect(() => {
-    axios.get("http://localhost:5000/getNessarary").then((res) => {
+    axios.get("http://localhost:5000/getSecondary").then((res) => {
       setItems(res.data);
       totalSum();
     });
@@ -102,7 +104,7 @@ function SecondaryTable() {
               console.log(a.id, "this is aid");
               console.log(items, "i can call");
 
-              axios.delete("http://localhost:5000/deleteNessaray", {
+              axios.delete("http://localhost:5000/deleteSecondary", {
                 data: { id: a.id },
               });
 
@@ -137,8 +139,14 @@ function SecondaryTable() {
       ))}
 
       {/* Show total sum */}
-      <h3 className="total">Total : {sum}</h3>
-      <Fab className="addButton" size="small" color="primary" aria-label="add">
+      <h3 className="total">Total : {secondarySum}</h3>
+      <Fab
+        className="addButton"
+        size="small"
+        color="primary"
+        aria-label="add"
+        onClick={showInputBox}
+      >
         <AddIcon />
       </Fab>
     </div>

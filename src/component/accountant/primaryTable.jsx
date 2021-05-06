@@ -6,6 +6,7 @@ import { DataGrid, ukUA } from "@material-ui/data-grid";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import axios from "axios";
+import { sumContext } from "./sumContext";
 
 const PrimaryTable = () => {
   const [items, setItems] = useState([]);
@@ -13,6 +14,8 @@ const PrimaryTable = () => {
   const [inputItem, setInputItem] = useState("");
   const [inputPrice, setInputPrice] = useState("");
   const [sum, setSum] = useState(0);
+
+  const { nessaraySum, setNessaraySum } = useContext(sumContext);
 
   // calculation
   const addition = (a, b) => {
@@ -24,7 +27,7 @@ const PrimaryTable = () => {
       return addition(a, v.price);
     }, 0);
 
-    setSum(result);
+    setNessaraySum(result);
   };
 
   // unhide input box
@@ -76,7 +79,6 @@ const PrimaryTable = () => {
   return (
     <div className="left-section">
       <p className="title">Necessary Expenses</p>
-
       {/* item table */}
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
@@ -112,7 +114,6 @@ const PrimaryTable = () => {
           }}
         />
       </div>
-
       {/* input box ordering */}
       {inputArray.map((input) => (
         <div className="wrapper" key={input.item}>
@@ -136,10 +137,8 @@ const PrimaryTable = () => {
           <ClearIcon className="icon" onClick={removeInputBox} />
         </div>
       ))}
-
       {/* Show total sum */}
-      <h3 className="total">Total : {sum}</h3>
-
+      <h3 className="total">Total : {nessaraySum}</h3>
       {/* + button */}
       <Fab
         className="addButton"

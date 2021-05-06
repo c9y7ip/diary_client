@@ -36,7 +36,7 @@
   position: absolute;
   width: 30%;
   height: 90%;
-  margin-left: 30%;
+  margin-left: 30.5%;
   margin-top: 2.5%;
   border-right: #e4fde1 solid 5px;
 }
@@ -44,17 +44,22 @@
 .right-section-1 {
   position: absolute;
   width: 30%;
-  height: 45%;
+  height: 60%;
   margin-top: 2.5%;
   margin-left: 65%;
   border-bottom: #e4fde1 solid 5px;
 }
 
 .right-section-2 {
-  margin-top: 77.5%;
+  margin-top: 15%;
+}
+
+.right-section-2-click {
+  margin-top: 5%;
 }
 
 .addButton {
+  bottom: 5px;
   left: 43%;
 }
 
@@ -79,4 +84,15 @@
 .wrapper {
   /* border: black 5px solid; */
   padding-bottom: 10px;
+}
+
+.summary {
+  display: inline;
+  font-weight: 500;
+  margin-left: 5%;
+}
+
+.summary-1 {
+  font-weight: 500;
+  margin-left: 5%;
 }
