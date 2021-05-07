@@ -56,11 +56,13 @@ const PrimaryTable = () => {
       };
       console.log(item);
 
-      axios.post("http://localhost:5000/addNessaray", item).then((res) => {
-        console.log(res.data);
-        totalSum();
-        window.location.reload();
-      });
+      axios
+        .post("https://diary-server-ray.herokuapp.com/addNessaray", item)
+        .then((res) => {
+          console.log(res.data);
+          totalSum();
+          window.location.reload();
+        });
 
       setInputItem("");
       setInputPrice("");
@@ -70,11 +72,13 @@ const PrimaryTable = () => {
 
   // useEffect update item table
   useEffect(() => {
-    axios.get("http://localhost:5000/getNessarary").then((res) => {
-      setItems(res.data);
-      totalSum();
-    });
-  }, [items]);
+    axios
+      .get("https://diary-server-ray.herokuapp.com/getNessarary")
+      .then((res) => {
+        setItems(res.data);
+        totalSum();
+      });
+  }, []);
 
   return (
     <div className="left-section">
@@ -105,9 +109,12 @@ const PrimaryTable = () => {
               console.log(a.id, "this is aid");
               console.log(items, "i can call");
 
-              axios.delete("http://localhost:5000/deleteNessaray", {
-                data: { id: a.id },
-              });
+              axios.delete(
+                "https://diary-server-ray.herokuapp.com/deleteNessaray",
+                {
+                  data: { id: a.id },
+                }
+              );
 
               totalSum();
             }

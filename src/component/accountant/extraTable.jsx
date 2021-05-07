@@ -65,11 +65,13 @@ function ExtraTable() {
       };
       console.log(item);
 
-      axios.post("http://localhost:5000/addExtra", item).then((res) => {
-        console.log(res.data);
-        totalSum();
-        window.location.reload();
-      });
+      axios
+        .post("https://diary-server-ray.herokuapp.com/addExtra", item)
+        .then((res) => {
+          console.log(res.data);
+          totalSum();
+          window.location.reload();
+        });
 
       setInputItem("");
       setInputPrice("");
@@ -79,11 +81,11 @@ function ExtraTable() {
 
   // useEffect update item table
   useEffect(() => {
-    axios.get("http://localhost:5000/getExtra").then((res) => {
+    axios.get("https://diary-server-ray.herokuapp.com/getExtra").then((res) => {
       setItems(res.data);
       totalSum();
     });
-  }, [items]);
+  }, []);
 
   return (
     <div className="right-section-1">
@@ -114,9 +116,12 @@ function ExtraTable() {
               console.log(a.id, "this is aid");
               console.log(items, "i can call");
 
-              axios.delete("http://localhost:5000/deleteExtra", {
-                data: { id: a.id },
-              });
+              axios.delete(
+                "https://diary-server-ray.herokuapp.com/deleteExtra",
+                {
+                  data: { id: a.id },
+                }
+              );
 
               totalSum();
             }

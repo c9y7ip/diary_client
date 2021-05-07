@@ -55,11 +55,13 @@ function SecondaryTable() {
       };
       console.log(item);
 
-      axios.post("http://localhost:5000/addSecondary", item).then((res) => {
-        console.log(res.data);
-        totalSum();
-        window.location.reload();
-      });
+      axios
+        .post("https://diary-server-ray.herokuapp.com/addSecondary", item)
+        .then((res) => {
+          console.log(res.data);
+          totalSum();
+          window.location.reload();
+        });
 
       setInputItem("");
       setInputPrice("");
@@ -69,11 +71,13 @@ function SecondaryTable() {
 
   // useEffect update item table
   useEffect(() => {
-    axios.get("http://localhost:5000/getSecondary").then((res) => {
-      setItems(res.data);
-      totalSum();
-    });
-  }, [items]);
+    axios
+      .get("https://diary-server-ray.herokuapp.com/getSecondary")
+      .then((res) => {
+        setItems(res.data);
+        totalSum();
+      });
+  }, []);
 
   return (
     <div className="middle-section">
@@ -104,9 +108,12 @@ function SecondaryTable() {
               console.log(a.id, "this is aid");
               console.log(items, "i can call");
 
-              axios.delete("http://localhost:5000/deleteSecondary", {
-                data: { id: a.id },
-              });
+              axios.delete(
+                "https://diary-server-ray.herokuapp.com/deleteSecondary",
+                {
+                  data: { id: a.id },
+                }
+              );
 
               totalSum();
             }
