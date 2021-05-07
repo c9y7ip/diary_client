@@ -85,7 +85,7 @@ function ExtraTable() {
       setItems(res.data);
       totalSum();
     });
-  }, []);
+  }, [items]);
 
   return (
     <div className="right-section-1">

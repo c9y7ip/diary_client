@@ -77,7 +77,7 @@ function SecondaryTable() {
         setItems(res.data);
         totalSum();
       });
-  }, []);
+  }, [items]);
 
   return (
     <div className="middle-section">

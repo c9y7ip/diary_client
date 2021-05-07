@@ -78,7 +78,7 @@ const PrimaryTable = () => {
         setItems(res.data);
         totalSum();
       });
-  }, []);
+  }, [items]);
 
   return (
     <div className="left-section">
